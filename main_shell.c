@@ -4,7 +4,7 @@
  * main - entry point for the shell program
  * Return: 0 on sucess or -1 when it fails
  */
-int main(int ac, char **av, char **env)
+int main(int ac __attribute__((unused)), char **av, char **env)
 {
 
 	char **args, *linebuf = NULL, *delim = " \n", *cmd;
