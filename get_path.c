@@ -16,7 +16,7 @@ char *get_path(char *arg)
 		free(pathcopy);
 		return (NULL);
 	}
-	if (stat(arg, &filestat) == 0)
+	if (stat(arg, &filestat) == 0 && (arg[0] == '.' || arg[0] == '/'))
 	{
 		fullpath = strdup(arg);
 		free(pathcopy);

@@ -10,7 +10,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 	char **args, *linebuf = NULL, *delim = " \n", *cmd;
 	size_t linesize = 0;
 	pid_t child;
-	int nb_got, is = 0, exitstatus = 0;
+	int nb_got, is = 0, exitstatus = 0, status;
 
 	while (1)
 	{
@@ -20,7 +20,6 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 			break;
 		else if (nb_got == 1)
 		{
-			free(linebuf);
 			continue;
 		}
 		else
@@ -56,12 +55,13 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 			{
 				execve(args[0], args, env);
 				perror("execve failed\n");
-				free_args(args, is);
-				return (-1);
+				return (2);
 			}
 			else
 			{
-				wait(NULL);
+				wait(&status);
+				if (WIFEXITED(status))
+					exitstatus = WEXITSTATUS(status);
 				free(cmd);
 				free_args(args, is);
 			}
