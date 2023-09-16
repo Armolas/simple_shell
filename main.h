@@ -15,6 +15,8 @@ int str_len(char *);
 char *concat(char *, char *);
 char *get_env(char *);
 char *get_path(char *);
-void free_args(char **);
+void free_args(char **, int);
+void p_error(char *);
+int count_args(char **);
 
 #endif /*MAIN_H*/

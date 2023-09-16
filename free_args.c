@@ -3,15 +3,16 @@
  * free_args - frees an array of strings
  * @args: array to free
  */
-void free_args(char **args)
+void free_args(char **args, int count)
 {
 	int i = 0;
 
 	if (args == NULL)
 		return;
-	while (args[i])
+	while (i < count)
 	{
-		free(args[i]);
+		if (args[i])
+			free(args[i]);
 		i++;
 	}
 	free(args);

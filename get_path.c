@@ -8,7 +8,7 @@
 char *get_path(char *arg)
 {
 	char *path = get_env("PATH");
-	char *path_token, *fullpath, *fullpath_temp, *pathcopy = str_dup(path);
+	char *path_token, *fullpath, *fullpathtemp, *pathcopy = str_dup(path);
 	struct stat filestat;
 
 	if (!arg)
@@ -18,21 +18,22 @@ char *get_path(char *arg)
 	}
 	if (stat(arg, &filestat) == 0)
 	{
+		fullpath = strdup(arg);
 		free(pathcopy);
-		return (arg);
+		return (fullpath);
 	}
 	path_token = strtok(pathcopy, ":");
 	while (path_token)
 	{
-		fullpath_temp = concat(path_token, "/");
-		fullpath = concat(fullpath_temp, arg);
+		fullpathtemp = concat(path_token, "/");
+		fullpath = concat(fullpathtemp, arg);
 		if (stat(fullpath, &filestat) == 0)
 		{
 			free(pathcopy);
-			free(fullpath_temp);
+			free(fullpathtemp);
 			return (fullpath);
 		}
-		free(fullpath_temp);
+		free(fullpathtemp);
 		free(fullpath);
 		path_token = strtok(NULL, ":");
 	}
