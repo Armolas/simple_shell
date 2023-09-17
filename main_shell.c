@@ -48,8 +48,9 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 			if (child == -1)
 			{
 				perror("unable to create new process");
+				free(cmd);
 				free_args(args, is);
-				return(-1);
+				return (-1);
 			}
 			else if (child == 0)
 			{
