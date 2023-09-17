@@ -18,5 +18,8 @@ char *get_path(char *);
 void free_args(char **, int);
 void p_error(char *);
 int count_args(char **);
+int _pow_recursion(int x, int y);
+int string_to_int(char *str);
+int are_digits(char *str);
 
 #endif /*MAIN_H*/
