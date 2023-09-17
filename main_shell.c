@@ -26,6 +26,12 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 		{
 			args = get_args(linebuf, delim);
 			is = count_args(args);
+			if (is == 2 && str_cmp(args[0], "exit") == 0 && are_digits(args[1]) == 1 && !args[2])
+			{
+				exitstatus = string_to_int(args[1]);
+				free_args(args, is);
+				break;
+			}
 			cmd = args[0];
 			if (!cmd)
 			{
