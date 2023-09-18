@@ -19,18 +19,20 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 		if (nb_got == -1 || str_cmp(linebuf, "exit\n") == 0)
 			break;
 		else if (nb_got == 1)
-		{
 			continue;
-		}
 		else
 		{
 			args = get_args(linebuf, delim);
 			is = count_args(args);
-			if (is == 2 && str_cmp(args[0], "exit") == 0 && are_digits(args[1]) == 1 && !args[2])
+			if (is == 2 && str_cmp(args[0], "exit") == 0)
 			{
-				exitstatus = string_to_int(args[1]);
-				free_args(args, is);
+				exitstatus = exit_arg(args, av[0], is);
 				break;
+			}
+			if (str_cmp(args[0], "env") == 0)
+			{
+				penv(args, is);
+				continue;
 			}
 			cmd = args[0];
 			if (!cmd)
@@ -41,27 +43,15 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 			args[0] = get_path(cmd);
 			if(!args[0])
 			{
-				p_error(av[0]);
-				p_error(": 1: ");
-				p_error(cmd);
-				p_error(": not found\n");
-				free(cmd);
-				free_args(args, is);
-				exitstatus = 127;
+				exitstatus = null_arg(args, cmd, av[0], is);
 				continue;
 			}
 			child = fork();
 			if (child == -1)
-			{
-				perror("unable to create new process");
-				free(cmd);
-				free_args(args, is);
-				return (-1);
-			}
+				return (child_fail(args, cmd, is));
 			else if (child == 0)
 			{
 				execve(args[0], args, env);
-				perror("execve failed\n");
 				return (2);
 			}
 			else

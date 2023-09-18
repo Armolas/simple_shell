@@ -21,5 +21,10 @@ int count_args(char **);
 int _pow_recursion(int x, int y);
 int string_to_int(char *str);
 int are_digits(char *str);
+int exit_arg(char **, char *, int);
+int null_arg(char **, char *, char *, int);
+int child_fail(char **, char *, int);
+void penv(char **, int);
+void _puts(char *);
 
 #endif /*MAIN_H*/
