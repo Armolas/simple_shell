@@ -9,8 +9,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 
 	char **args, *linebuf = NULL, *delim = " \n", *cmd;
 	size_t linesize = 0;
-	pid_t child;
-	int nb_got, is = 0, exitstatus = 0, status;
+	int nb_got, is = 0, exitstatus = 0;
 
 	while (1)
 	{
@@ -46,22 +45,9 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 				exitstatus = null_arg(args, cmd, av[0], is);
 				continue;
 			}
-			child = fork();
-			if (child == -1)
-				return (child_fail(args, cmd, is));
-			else if (child == 0)
-			{
-				execve(args[0], args, env);
-				return (2);
-			}
-			else
-			{
-				wait(&status);
-				if (WIFEXITED(status))
-					exitstatus = WEXITSTATUS(status);
-				free(cmd);
-				free_args(args, is);
-			}
+			exitstatus = fork_child(args, env, cmd, is);
+			if (exitstatus < 0)
+				return (exitstatus);
 		}
 	}
 	free(linebuf);
