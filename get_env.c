@@ -1,4 +1,5 @@
 #include "main.h"
+extern char **environ;
 /**
  * get_env - gets an environment variable
  * @var: variable name
@@ -7,14 +8,13 @@
 char *get_env(char *var)
 {
 	int i = 0, j;
-	extern char **environ;
 
 	if (!var)
 		return (NULL);
 	while (environ[i])
 	{
 		j = 0;
-		while(environ[i][j] != '=' && var[j])
+		while (environ[i][j] != '=' && var[j])
 		{
 			if (environ[i][j] == var[j])
 			{
