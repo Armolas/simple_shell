@@ -21,7 +21,7 @@ char **get_args(char *linebuf, char *delim)
 	count++;
 	args = malloc(sizeof(char *) * count);
 	arg = strtok(linebuf, delim);
-	while(arg)
+	while (arg)
 	{
 		args[i] = str_dup(arg);
 		arg = strtok(NULL, delim);
