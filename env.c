@@ -1,9 +1,8 @@
 #include "main.h"
-extern char **environ;
 /**
+ * penv - prints environment
  * @args: array of string inputs to the shell
  * @is: number of string input
- * penv - prints environment
  */
 void penv(char **args, int is)
 {
