@@ -27,7 +27,7 @@ int fork_child(char **args, char **env, char *cmd, int is)
 		if (WIFEXITED(status))
 			exitstatus = WEXITSTATUS(status);
 		free(cmd);
-		free_args(args,is);
+		free_args(args, is);
 	}
 	return (exitstatus);
 }
