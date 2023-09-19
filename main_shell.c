@@ -43,7 +43,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 				continue;
 			}
 			args[0] = get_path(cmd);
-			if(!args[0])
+			if (!args[0])
 			{
 				exitstatus = null_arg(args, cmd, av[0], is);
 				continue;
