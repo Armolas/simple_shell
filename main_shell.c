@@ -50,7 +50,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 			}
 			exitstatus = fork_child(args, env, cmd, is);
 			if (exitstatus < 0)
-				return (exitstatus);
+				break;
 		}
 	}
 	free(linebuf);
