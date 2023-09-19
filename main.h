@@ -28,4 +28,5 @@ int child_fail(char **, char *, int);
 void penv(char **, int);
 void _puts(char *);
 int fork_child(char **, char **, char *, int);
+int inbuilt(char **, char *, char *, int, int *);
 #endif /*MAIN_H*/
