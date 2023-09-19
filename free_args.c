@@ -1,6 +1,7 @@
 #include "main.h"
 /**
  * free_args - frees an array of strings
+ * @count: number of strings
  * @args: array to free
  */
 void free_args(char **args, int count)
@@ -16,5 +17,4 @@ void free_args(char **args, int count)
 		i++;
 	}
 	free(args);
-	return;
 }
