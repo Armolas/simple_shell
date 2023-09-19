@@ -2,6 +2,9 @@
 
 /**
  * main - entry point for the shell program
+ * @ac: argument count
+ * @av: array of string arguments to main
+ * @env: environment
  * Return: 0 on sucess or -1 when it fails
  */
 int main(int ac __attribute__((unused)), char **av, char **env)
