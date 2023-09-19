@@ -7,7 +7,7 @@
  */
 char *concat(char *str1, char *str2)
 {
-	int i = 0 , j = 0;
+	int i = 0, j = 0;
 	char *new;
 
 	if (!str1 && str2)
