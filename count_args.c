@@ -8,7 +8,7 @@ int count_args(char **args)
 {
 	int count = 0;
 
-	while(args[count])
+	while (args[count])
 	{
 		count++;
 	}
