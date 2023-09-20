@@ -22,6 +22,12 @@ int inbuilt(char **args, char *cmd, char *av, int is, int *exit)
 		free_args(args, is);
 		return (0);
 	}
+	if (str_cmp(args[0], "cd") == 0)
+	{
+		_chdir(args[1], av);
+		free_args(args, is);
+		return (0);
+	}
 	if (str_cmp(args[0], "unsetenv") == 0)
 	{
 		unsetenv(args[1]);
