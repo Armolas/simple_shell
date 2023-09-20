@@ -38,6 +38,7 @@ int _chdir(char *dir_name, char *av)
 		p_error(": 1: cd: can't cd to ");
 		p_error(dir_name);
 		p_error("\n");
+		free(current);
 		return (-1);
 	}
 	getcwd(current, cur_size);
