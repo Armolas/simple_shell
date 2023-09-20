@@ -7,7 +7,7 @@
  */
 int _chdir(char *dir_name, char *av)
 {
-	char *old = get_env("OLDPWD");
+	char *old = get_env("OLDPWD"), *present = get_env("PWD");
 	char *current = malloc(sizeof(char) * 1024), *home = get_env("HOME");
 	size_t cur_size = 1024;
 	int ret;
@@ -16,6 +16,7 @@ int _chdir(char *dir_name, char *av)
 	{
 		chdir(home);
 		getcwd(current, cur_size);
+		setenv("OLDPWD", present, 1);
 		setenv("PWD", current, 1);
 		free(current);
 		return (0);
@@ -26,6 +27,7 @@ int _chdir(char *dir_name, char *av)
 		getcwd(current, cur_size);
 		_puts(current);
 		_puts("\n");
+		setenv("OLDPWD", present, 1);
 		setenv("PWD", current, 1);
 		free(current);
 		return (0);
@@ -41,6 +43,7 @@ int _chdir(char *dir_name, char *av)
 		return (-1);
 	}
 	getcwd(current, cur_size);
+	setenv("OLDPWD", present, 1);
 	setenv("PWD", current, 1);
 	free(current);
 	return (0);
