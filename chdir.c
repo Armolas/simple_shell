@@ -8,8 +8,7 @@
 int _chdir(char *dir_name, char *av)
 {
 	char *old = get_env("OLDPWD"), *present = get_env("PWD");
-	char *home = get_env("HOME");
-	char *current = malloc(sizeof(char) * 1024);
+	char *current = malloc(sizeof(char) * 1024), *home = get_env("HOME");
 	size_t cur_size = 1024;
 	int ret;
 
@@ -26,6 +25,8 @@ int _chdir(char *dir_name, char *av)
 	{
 		chdir(old);
 		getcwd(current, cur_size);
+		_puts(current);
+		_puts("\n");
 		setenv("OLDPWD", present, 1);
 		setenv("PWD", current, 1);
 		free(current);
