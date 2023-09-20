@@ -18,6 +18,8 @@ int inbuilt(char **args, char *cmd, char *av, int is, int *exit)
 	}
 	if (str_cmp(args[0], "setenv") == 0)
 	{
+		if  (is != 3)
+			return (0);
 		setenv(args[1], args[2], 1);
 		free_args(args, is);
 		return (0);
