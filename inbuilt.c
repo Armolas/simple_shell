@@ -16,6 +16,18 @@ int inbuilt(char **args, char *cmd, char *av, int is, int *exit)
 		penv(args, is);
 		return (0);
 	}
+	if (str_cmp(args[0], "setenv") == 0)
+	{
+		setenv(args[1], args[2], 0);
+		free_args(args, is);
+		return (0);
+	}
+	if (str_cmp(args[0], "unsetenv") == 0)
+	{
+		unsetenv(args[1]);
+		free_args(args, is);
+		return (0);
+	}
 	cmd = args[0];
 	if (!cmd)
 	{
